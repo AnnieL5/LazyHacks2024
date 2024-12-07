@@ -11,7 +11,6 @@ class Task {
         this.hours = hours;
     }
 
-    // Getters
     public String getName() {
         return name;
     }
@@ -32,8 +31,12 @@ class Task {
         return hours;
     }
 
+    public void usedHours(double h) {
+        this.hours = hours-h;
+    }
+
     @Override
     public String toString() {
-        return name+" Due date: "+month+"/"+year+"/"+date+"  Need "+hours+" hours to complete";
+        return name+" Due date: "+month+"/"+date+"/"+year+"  Need "+hours+" hours to complete";
     }
 }

@@ -18,7 +18,6 @@ public class TaskFrame extends JFrame implements ActionListener {
         display.setSize(400, 200);
         this.add(display);
 
-        // Task Name
         JLabel nameLabel = new JLabel("Task Name:");
         nameLabel.setBounds(50, 50, 100, 30);
         display.add(nameLabel);
@@ -26,7 +25,6 @@ public class TaskFrame extends JFrame implements ActionListener {
         textField.setBounds(150, 50, 200, 30);
         display.add(textField);
 
-        // Due Date
         JLabel dueDateLabel = new JLabel("Due Date (numbers):");
         dueDateLabel.setBounds(50, 100, 200, 30);
         display.add(dueDateLabel);
@@ -52,7 +50,6 @@ public class TaskFrame extends JFrame implements ActionListener {
         year.setBounds(345, 100, 50, 30);
         display.add(year);
 
-        // Spinner for hours
         JLabel spinnerLabel = new JLabel("How many hours is this task expected to need:");
         spinnerLabel.setBounds(50, 150, 300, 30);
         display.add(spinnerLabel);
@@ -62,7 +59,6 @@ public class TaskFrame extends JFrame implements ActionListener {
 
       
 
-        // Submit Button
         submitButton = new JButton("Submit");
         submitButton.setBounds(150, 200, 100, 30);
         submitButton.addActionListener(this);
@@ -80,13 +76,12 @@ public class TaskFrame extends JFrame implements ActionListener {
                 System.out.println("trying..."); 
                 String n =textField.getText();          
                 int m = Integer.parseInt(month.getText());
-                int d = Integer.parseInt(date.getText());
-                int y = Integer.parseInt(year.getText());
+                int d = Integer.parseInt(year.getText());
+                int y = Integer.parseInt(date.getText());
                 double t = Double.parseDouble(time.getText());
-
+                System.out.println("d="+Integer.parseInt(date.getText()));
         
         
-                // Create and add task
                 System.out.println("Creating task");
                 Task task = new Task(n, m, d, y, t);
                 System.out.println("Task created"); 
@@ -94,14 +89,11 @@ public class TaskFrame extends JFrame implements ActionListener {
 
                 System.out.println("Task added: " + n + ", Due Date: " + m + "/" + d + "/" + y + ", Hours: " + t);
         
-                // Display confirmation message
                 JOptionPane.showMessageDialog(this, "Task Added: " + task.toString(), "Confirmation", JOptionPane.INFORMATION_MESSAGE);
         
-                // Close the TaskFrame
                 this.dispose();
                 new ModifyTaskFrame(array);
             } catch (NumberFormatException ex) {
-                // Handle invalid input case
                 JOptionPane.showMessageDialog(this, "Invalid input! Please make sure all fields are filled correctly.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }

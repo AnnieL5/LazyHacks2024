@@ -14,8 +14,8 @@ public class ModifyTaskFrame extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         array = a;
-
-
+        prioritize(array);
+        
         JPanel display = new JPanel();
         display.setLayout(null);
         display.setSize(400, 200);
@@ -85,6 +85,64 @@ public class ModifyTaskFrame extends JFrame implements ActionListener {
         display.add(description);
 
 
+    }
+
+    public static void prioritize(ArrayList<Task> a){
+        
+
+        while(!isPrioritized(a)){
+       
+        for(int i = 0; i<a.size()-1; i++){
+            Task task = a.get(i);
+            int year1 = a.get(i).getYear();
+            int year2 = a.get(i+1).getYear();
+            int month1 = a.get(i).getMonth();
+            int month2 = a.get(i+1).getMonth();
+            int date1 = a.get(i).getDate();
+            int date2 = a.get(i+1).getDate();
+
+            if((year1>year2)||((year1==year2)&&(month1>month2))||((year1==year2)&&(month1==month2)&&(date1>date2))){
+                System.out.println("priority set");
+                
+                a.set(i,a.get(i+1));
+                a.set(i+1,task);
+            }else if((year1==year2)&&(month1==month2)&&(date1==date2)){
+                if(a.get(i).getHours()<a.get(i+1).getHours()){
+                    System.out.println("priority set");
+                    a.set(i,a.get(i+1));
+                    a.set(i+1,task);
+                }
+            }else{
+                
+            }
+          
+            
+          
+        }
+        } 
+
+    }
+
+    public static boolean isPrioritized(ArrayList<Task> a){
+        boolean prioritized = true;
+        for(int i = 0; i<a.size()-1; i++){
+            int year1 = a.get(i).getYear();
+            int year2 = a.get(i+1).getYear();
+            int month1 = a.get(i).getMonth();
+            int month2 = a.get(i+1).getMonth();
+            int date1 = a.get(i).getDate();
+            int date2 = a.get(i+1).getDate();
+
+            if((year1>year2)||((year1==year2)&&(month1>month2))||((year1==year2)&&(month1==month2)&&(date1>date2))){
+                prioritized=false;
+            }else if((year1==year2)&&(month1==month2)&&(date1==date2)){
+                if(a.get(i).getHours()<a.get(i+1).getHours()){
+                    prioritized=false;
+                }
+            }
+          
+        }
+        return prioritized;
     }
 
    
