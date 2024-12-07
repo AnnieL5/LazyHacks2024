@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,8 +37,16 @@ public class MainFrame implements ActionListener{
     
     private JButton tasksButton = new JButton("Manage Tasks");
     private JButton routineButton = new JButton("Manage Routine");
+    private JButton sendB = new JButton();
 
-    private JTextField chatInput = new JTextField("Message");
+    private JTextField chatInputField = new JTextField("Message");
+
+
+    private String[] chatInput = new String[1000];
+    private String[] botResponse = new String[1000];
+
+    private int userMsgNum = 0;
+    private int botMsgNum = 0;
 
     private ArrayList<Task> taskList;
 
@@ -55,8 +64,18 @@ public class MainFrame implements ActionListener{
 
         chatPanel.setBackground(new Color(255, 238, 238));
         mainPanel.add(chatPanel);
-        chatInput.setBounds(10, (int)screenSize.getHeight() - 20 - 100, (int)screenSize.getWidth()/2 - 60, 50);
-        chatPanel.add(chatInput);
+        chatInputField.setBounds(10, (int)screenSize.getHeight() - 20 - 100, (int)screenSize.getWidth()/2 - 60, 50);
+        chatPanel.add(chatInputField);
+
+        sendB.setBounds(chatInputField.getWidth() + 15, chatInputField.getY() + 5, 40, 40);
+        try {
+            Image img = ImageIO.read(getClass().getResource("smallSendButton.png"));
+            sendB.setIcon(new ImageIcon(img));
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        sendB.addActionListener(this::actionPerformedSend);
+        chatPanel.add(sendB);
 
         schedulePanel.setBackground(new Color(238, 238, 255));
 
@@ -79,13 +98,14 @@ public class MainFrame implements ActionListener{
         buttonsPanel.setSize(screenSize.width/2, screenSize.height/6);
 
         tasksButton.setSize(new Dimension(buttonsPanel.getWidth(), buttonsPanel.getHeight()));
+        tasksButton.setFont(tasksButton.getFont().deriveFont(Font.BOLD, 35f));
         tasksButton.addActionListener(this::actionPerformed);
         buttonsPanel.add(tasksButton);
 
 
         routineButton.setSize(new Dimension(buttonsPanel.getWidth(), buttonsPanel.getHeight()));
+        routineButton.setFont(routineButton.getFont().deriveFont(Font.BOLD, 35f));
         routineButton.addActionListener(this::actionPerformedRoutine);
-        // buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
         buttonsPanel.add(routineButton);
 
         buttonsPanel.setBackground(new Color(200, 238, 200));
@@ -149,5 +169,12 @@ public class MainFrame implements ActionListener{
 
     public void actionPerformedRoutine(ActionEvent e) {
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
+
+    public void actionPerformedSend(ActionEvent e) {
+        chatInput[userMsgNum] = chatInputField.getText();
+        chatInputField.setText("Message");
+        System.out.println(chatInput[userMsgNum]);
+        userMsgNum++;
     }
 }
