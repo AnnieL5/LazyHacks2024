@@ -176,5 +176,8 @@ public class MainFrame implements ActionListener{
         chatInputField.setText("Message");
         System.out.println(chatInput[userMsgNum]);
         userMsgNum++;
+        // botResponse[botMsgNum] = pythonFunction();
+
     }
 }
+ //test
