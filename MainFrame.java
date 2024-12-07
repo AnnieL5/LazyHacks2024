@@ -37,6 +37,8 @@ public class MainFrame implements ActionListener{
     private JButton tasksButton = new JButton("Manage Tasks");
     private JButton routineButton = new JButton("Manage Routine");
 
+    private JTextField chatInput = new JTextField("Message");
+
     private ArrayList<Task> taskList;
 
     private DateFormat formatter = new SimpleDateFormat("EEEEEEEEE", Locale.getDefault());
@@ -50,8 +52,11 @@ public class MainFrame implements ActionListener{
 
         mainPanel.setBounds(mainFrame.getBounds());
 
+
         chatPanel.setBackground(new Color(255, 238, 238));
         mainPanel.add(chatPanel);
+        chatInput.setBounds(10, (int)screenSize.getHeight() - 20 - 100, (int)screenSize.getWidth()/2 - 60, 50);
+        chatPanel.add(chatInput);
 
         schedulePanel.setBackground(new Color(238, 238, 255));
 
