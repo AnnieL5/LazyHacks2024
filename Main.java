@@ -82,7 +82,7 @@ public class Main {
         constraintsCalendar.gridy = 0;
         constraintsCalendar.fill = GridBagConstraints.BOTH;
         constraintsCalendar.weightx = 1.0;
-        constraintsCalendar.weighty = 1.0/24.0;
+        constraintsCalendar.weighty = 1.0;
 
         JScrollPane calendarScroll = new JScrollPane(calendarPanel);
         calendarScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -105,12 +105,17 @@ public class Main {
             // timeNumbers[i].setSize((int)calendarPanel.getBounds().getWidth()*3/14, rectSizeHeight);
             calendarPanel.add(timeNumbers[i], constraintsCalendar);
             constraintsCalendar.gridy++;
+            if (i<timeNumbers.length-1) {
+                // constraintsCalendar.fill = GridBagConstraints.VERTICAL;
+                calendarPanel.add(Box.createVerticalStrut((int)rectSizeHeight/10), constraintsCalendar);
+                // constraintsCalendar.fill = GridBagConstraints.BOTH;
+                constraintsCalendar.gridy++;
+            }
         }
 
         for (int i = 0; i < 7; i++) {
             constraintsCalendar.gridx++;
             calendarPanel.add(Box.createHorizontalStrut((int)calendarPanel.getBounds().getWidth()/8), constraintsCalendar);
-            System.out.println(calendarPanel.getBounds().getWidth());
         }
     }
 
