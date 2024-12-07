@@ -13,12 +13,14 @@ public class Main {
     private static JPanel chatPanel = new JPanel(null);
     private static JPanel schedulePanel = new JPanel(new GridBagLayout());
     private static JPanel datePanel = new JPanel(new GridBagLayout());
-    private static JPanel calendarPanel = new JPanel(null);
+    private static JPanel calendarPanel = new JPanel(new GridBagLayout());
     private static JPanel buttonsPanel = new JPanel(null);
 
     private static JLabel dateText;
-
+    
+    private static DateFormat formatter = new SimpleDateFormat("EEEEEEEEE", Locale.getDefault());
     private static Calendar date = Calendar.getInstance();
+    private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public static void main(String[] args) {
 
@@ -34,37 +36,51 @@ public class Main {
         constraintsSchedule.gridy = 0;
         constraintsSchedule.fill = GridBagConstraints.BOTH;
         constraintsSchedule.weightx = 1.0;
-        constraintsSchedule.weighty = 0.07;
+        constraintsSchedule.weighty = 0.06;
+
+        GridBagConstraints constraintsCalendar = new GridBagConstraints();
+        constraintsCalendar.gridx = 0;
+        constraintsCalendar.gridy = 0;
+        constraintsCalendar.fill = GridBagConstraints.BOTH;
+        constraintsCalendar.weightx = 1.0/7.0;
+        constraintsCalendar.weighty = 1.0/24.0;
 
         datePanel.setBackground(new Color(200, 238, 238));
         schedulePanel.add(datePanel, constraintsSchedule);
-        constraintsSchedule.weighty = 0.75;
-        constraintsSchedule.gridy++;
+        constraintsSchedule.weighty = 0.1;
+        constraintsSchedule.gridy+=2;
 
-
-        DateFormat formatter = new SimpleDateFormat("EEEEEEEEE", Locale.getDefault());
-        String dayOfWeek = formatter.format(date.getTime());
-
-
-        dateText = new JLabel(dayOfWeek + ", " + date.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + ", " + date.get(Calendar.DAY_OF_MONTH));
+        dateText = new JLabel(formatter.format(date.getTime()) + ", " + date.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + ", " + date.get(Calendar.DAY_OF_MONTH));
         dateText.setFont(dateText.getFont().deriveFont(Font.BOLD, 27f));
         datePanel.add(dateText, new GridBagConstraints());
 
-        calendarPanel.setBackground(new Color(200, 200, 238));
-        schedulePanel.add(calendarPanel, constraintsSchedule);
-        constraintsSchedule.weighty = 0.125;
-        constraintsSchedule.gridy++;
-
-        buttonsPanel.setSize(mainFrame.getSize().width/2, mainFrame.getSize().height/6);
+        buttonsPanel.setSize(screenSize.width/2, screenSize.height/6);
         buttonsPanel.setBackground(new Color(200, 238, 200));
         schedulePanel.add(buttonsPanel, constraintsSchedule);
+        constraintsSchedule.weighty = 0.9;
+        constraintsSchedule.gridy--;
+
+        calendarPanel.setBackground(new Color(200, 200, 238));
+        calendarPanel.setPreferredSize(new Dimension((int)(screenSize.width/2.1), screenSize.height));
+        schedulePanel.add(calendarPanel, constraintsSchedule);
+
+        JScrollPane calendarScroll = new JScrollPane(calendarPanel);
+        calendarScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        calendarScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        schedulePanel.add(calendarScroll, constraintsSchedule);
 
         mainPanel.add(schedulePanel);
         mainFrame.add(mainPanel);
         mainFrame.pack();
-        mainFrame.setExtendedState(mainFrame.MAXIMIZED_BOTH);
+        mainFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
+
+    public void paint(Graphics g) 
+    { 
+        g.drawRect(calendarPanel.getX(), calendarPanel.getY(), calendarPanel.getWidth()/7, calendarPanel.getHeight()/24); 
+    } 
+
 }
