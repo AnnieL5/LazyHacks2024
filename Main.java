@@ -1,11 +1,5 @@
-
-import java.util.ArrayList;
-
-
-public class Main {
-    public static void main(String[] args) {
-        ArrayList<Task> taskList = new ArrayList<>();
-        //new TaskFrame(taskList);
-        new ModifyTaskFrame(taskList);
+public class Main_work {
+    public static void main (String[] args) {
+        new MainFrame();
     }
 }
