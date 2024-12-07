@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,13 +35,16 @@ public class MainFrame implements ActionListener{
 
     private JLabel dateText;
     private JLabel[] timeNumbers = new JLabel[24];
+    private JLabel userMessage = new JLabel();
+    private JLabel botMessage = new JLabel();
     
     private JButton tasksButton = new JButton("Manage Tasks");
     private JButton routineButton = new JButton("Manage Routine");
     private JButton sendB = new JButton();
+    private JButton arrowLeft = new JButton();
+    private JButton arrowRight = new JButton();
 
     private JTextField chatInputField = new JTextField("Message");
-
 
     private String[] chatInput = new String[1000];
     private String[] botResponse = new String[1000];
@@ -76,6 +80,39 @@ public class MainFrame implements ActionListener{
         }
         sendB.addActionListener(this::actionPerformedSend);
         chatPanel.add(sendB);
+
+
+        arrowLeft.setBounds(10, (int)screenSize.getHeight()/2 - 69, 69, 69);
+        try {
+            Image img = ImageIO.read(getClass().getResource("arrowLeft.png"));
+            arrowLeft.setIcon(new ImageIcon(img));
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        arrowLeft.addActionListener(this::actionPerformedArrowLeft);
+        chatPanel.add(arrowLeft);
+
+
+
+        arrowRight.setBounds((int)screenSize.getWidth()/2 - 79, (int)screenSize.getHeight()/2 - 69, 69, 69);
+        try {
+            Image img = ImageIO.read(getClass().getResource("arrowRight.png"));
+            arrowRight.setIcon(new ImageIcon(img));
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        arrowRight.addActionListener(this::actionPerformedArrowRight);
+        chatPanel.add(arrowRight);
+
+        userMessage.setBounds(100, 10, screenSize.width/2 - 200, screenSize.height/3);
+        chatPanel.add(userMessage);
+
+        botMessage.setBounds(100, 2*screenSize.height/3 + 10, screenSize.width/2 - 200, screenSize.height/3);
+        chatPanel.add(botMessage);
+
+
+
+
 
         schedulePanel.setBackground(new Color(238, 238, 255));
 
@@ -177,6 +214,44 @@ public class MainFrame implements ActionListener{
         System.out.println(chatInput[userMsgNum]);
         userMsgNum++;
         // botResponse[botMsgNum] = pythonFunction();
+
+    }
+
+    public void actionPerformedArrowLeft(ActionEvent e) {
+        userMsgNum--;
+        try {
+            userMessage.setText(chatInput[userMsgNum]);
+            userMessage.repaint();
+        } catch (Exception d) {
+            System.err.println(d);
+        }
+    
+        botMsgNum--;
+        try {
+            botMessage.setText(chatInput[botMsgNum]);
+            botMessage.repaint();
+        } catch (Exception d) {
+            System.err.println(d);
+        }
+
+    }
+
+    public void actionPerformedArrowRight(ActionEvent e) {
+        userMsgNum++;
+        try {
+            userMessage.setText(chatInput[userMsgNum]);
+            userMessage.repaint();
+        } catch (Exception d) {
+            System.err.println(d);
+        }
+
+        botMsgNum++;
+        try {
+            botMessage.setText(chatInput[botMsgNum]);
+            botMessage.repaint();
+        } catch (Exception d) {
+            System.err.println(d);
+        }
 
     }
 }
