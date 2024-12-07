@@ -10,7 +10,7 @@ public class TaskFrame extends JFrame implements ActionListener {
 
     public TaskFrame(ArrayList<Task> a) {
         this.setBounds(50, 60, 1000, 600);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         array = a;
 
         JPanel display = new JPanel();
