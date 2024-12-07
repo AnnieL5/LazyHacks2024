@@ -5,13 +5,15 @@ import java.util.ArrayList;
 
 public class TaskFrame extends JFrame implements ActionListener {
     private JTextField textField, month, date, year, time;
-    private ArrayList<Task> array;
+    private ArrayList<Task> taskarray;
+    private ArrayList<Routine> routinearray;
     private JButton submitButton;
 
-    public TaskFrame(ArrayList<Task> a) {
+    public TaskFrame(ArrayList<Task> a,ArrayList<Routine> b) {
         this.setBounds(50, 60, 1000, 600);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        array = a;
+        taskarray = a;
+        routinearray = b;
 
         JPanel display = new JPanel();
         display.setLayout(null);
@@ -85,14 +87,14 @@ public class TaskFrame extends JFrame implements ActionListener {
                 System.out.println("Creating task");
                 Task task = new Task(n, m, d, y, t);
                 System.out.println("Task created"); 
-                array.add(task);
-
+                taskarray.add(task);
+                new Schedual(taskarray,routinearray);
                 System.out.println("Task added: " + n + ", Due Date: " + m + "/" + d + "/" + y + ", Hours: " + t);
         
                 JOptionPane.showMessageDialog(this, "Task Added: " + task.toString(), "Confirmation", JOptionPane.INFORMATION_MESSAGE);
         
                 this.dispose();
-                new ModifyTaskFrame(array);
+                new ModifyTaskFrame(taskarray, routinearray);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Invalid input! Please make sure all fields are filled correctly.", "Error", JOptionPane.ERROR_MESSAGE);
             }

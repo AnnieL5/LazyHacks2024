@@ -13,11 +13,11 @@ public class Routine {
         return name;
     }
 
-    public String stime() {
+    public String getStime() {
         return stime;
     }
 
-    public String etime() {
+    public String getEtime() {
         return etime;
     }
 

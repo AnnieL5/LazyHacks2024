@@ -39,4 +39,8 @@ class Task {
     public String toString() {
         return name+" Due date: "+month+"/"+date+"/"+year+"  Need "+hours+" hours to complete";
     }
+
+    public String getStime() {
+        return null;
+    }
 }

@@ -25,7 +25,7 @@ public class RoutineFrame extends JFrame implements ActionListener {
         textField.setBounds(150, 50, 200, 30);
         display.add(textField);
 
-        JLabel stimeLabel = new JLabel("(24h 00:00) Start Time:");
+        JLabel stimeLabel = new JLabel("(24h) Start Time:");
         stimeLabel.setBounds(110, 100, 150, 30);
         display.add(stimeLabel);
         stime = new JTextField();
@@ -66,7 +66,7 @@ public class RoutineFrame extends JFrame implements ActionListener {
                 Routine Routine = new Routine(n, s, E);
                 System.out.println("Routine created"); 
                 array.add(Routine);
-
+                
                 String string = "Routine added! "+n+", from "+s+ " to "+E;
         
                 JOptionPane.showMessageDialog(this,"Routine added:"+ Routine.toString(), "Confirmation", JOptionPane.INFORMATION_MESSAGE);

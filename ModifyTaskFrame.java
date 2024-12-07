@@ -5,16 +5,18 @@ import java.util.ArrayList;
 
 public class ModifyTaskFrame extends JFrame implements ActionListener {
    
-    static ArrayList<Task> array;
+    static ArrayList<Task> taskarray;
+    ArrayList<Routine> routinearray;
     JButton AddButton,DeleteButton;
     JTextField deletenum;
     
-    public ModifyTaskFrame(ArrayList<Task> a) {
+    public ModifyTaskFrame(ArrayList<Task> a, ArrayList<Routine> b) {
         this.setBounds(50, 60, 1000, 600);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
-        array = a;
-        prioritize(array);
+        taskarray = a;
+        routinearray = b;
+        prioritize(taskarray);
         
         JPanel display = new JPanel();
         display.setLayout(null);
@@ -22,7 +24,7 @@ public class ModifyTaskFrame extends JFrame implements ActionListener {
         this.add(display);
 
 
-        for(int i = 0; i<array.size(); i++){
+        for(int i = 0; i<taskarray.size(); i++){
             AddTask(i,display);
         }
 
@@ -49,7 +51,7 @@ public class ModifyTaskFrame extends JFrame implements ActionListener {
         System.out.println("button pressed"); 
         if (e.getSource() == AddButton) {
             try {
-                new TaskFrame(array);
+                new TaskFrame(taskarray,routinearray);
                 this.dispose();
             } catch (NumberFormatException ex) {
                 // Handle invalid input case
@@ -60,11 +62,11 @@ public class ModifyTaskFrame extends JFrame implements ActionListener {
             try {
   
                 int num = Integer.parseInt(deletenum.getText());
-                Task task = array.get(num-1);
-                array.remove(num-1);
+                Task task = taskarray.get(num-1);
+                taskarray.remove(num-1);
                 this.dispose();
                 JOptionPane.showMessageDialog(this, "Task "+num+" "+ task.toString(), "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-                new ModifyTaskFrame(array);
+                new ModifyTaskFrame(taskarray, routinearray);
             } catch (NumberFormatException ex) {
                 // Handle invalid input case
                 JOptionPane.showMessageDialog(this, "Invalid input! Please make sure all fields are filled correctly.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -77,7 +79,7 @@ public class ModifyTaskFrame extends JFrame implements ActionListener {
 
     public static void AddTask(int taskNum, JPanel display){
         int n = 100+(50*taskNum);
-        Task task = array.get(taskNum);
+        Task task = taskarray.get(taskNum);
         int num = taskNum+1;
 
         JLabel description = new JLabel("Task "+num+" "+task.toString());
