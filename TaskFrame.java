@@ -14,7 +14,6 @@ public class TaskFrame extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         taskarray = a;
         routinearray = b;
-
         JPanel display = new JPanel();
         display.setLayout(null);
         display.setSize(400, 200);
@@ -88,13 +87,15 @@ public class TaskFrame extends JFrame implements ActionListener {
                 Task task = new Task(n, m, d, y, t);
                 System.out.println("Task created"); 
                 taskarray.add(task);
-                new Schedual(taskarray,routinearray);
                 System.out.println("Task added: " + n + ", Due Date: " + m + "/" + d + "/" + y + ", Hours: " + t);
-        
+                
+                // Display confirmation message
                 JOptionPane.showMessageDialog(this, "Task Added: " + task.toString(), "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-        
+                new Schedule(taskarray,routinearray);
+
+                // Close the TaskFrame
                 this.dispose();
-                new ModifyTaskFrame(taskarray, routinearray);
+                new ModifyTaskFrame(taskarray,routinearray);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Invalid input! Please make sure all fields are filled correctly.", "Error", JOptionPane.ERROR_MESSAGE);
             }

@@ -11,7 +11,7 @@ public class ModifyRoutineFrame extends JFrame implements ActionListener {
     
     public ModifyRoutineFrame(ArrayList<Routine> a) {
         this.setBounds(50, 60, 1000, 600);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         array = a;
         
@@ -85,6 +85,7 @@ public class ModifyRoutineFrame extends JFrame implements ActionListener {
 
 
     }
+
 
     
 

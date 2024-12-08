@@ -9,6 +9,7 @@ public class ModifyTaskFrame extends JFrame implements ActionListener {
     ArrayList<Routine> routinearray;
     JButton AddButton,DeleteButton;
     JTextField deletenum;
+   //int count =0;
     
     public ModifyTaskFrame(ArrayList<Task> a, ArrayList<Routine> b) {
         this.setBounds(50, 60, 1000, 600);
@@ -66,7 +67,7 @@ public class ModifyTaskFrame extends JFrame implements ActionListener {
                 taskarray.remove(num-1);
                 this.dispose();
                 JOptionPane.showMessageDialog(this, "Task "+num+" "+ task.toString(), "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-                new ModifyTaskFrame(taskarray, routinearray);
+                new ModifyTaskFrame(taskarray,routinearray);
             } catch (NumberFormatException ex) {
                 // Handle invalid input case
                 JOptionPane.showMessageDialog(this, "Invalid input! Please make sure all fields are filled correctly.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -146,6 +147,4 @@ public class ModifyTaskFrame extends JFrame implements ActionListener {
         }
         return prioritized;
     }
-
-   
 }
