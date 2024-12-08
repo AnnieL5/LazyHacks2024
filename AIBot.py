@@ -17,4 +17,5 @@ def getAns(question):
 with open('file.txt', 'w') as f:
     f.write(model.generate_content(question).text)
 
+print("Schedule generated!")
 #print(model.generate_content("Hi").text)
